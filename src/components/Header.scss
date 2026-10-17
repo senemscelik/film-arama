@@ -1,0 +1,69 @@
+@use '../styles/mixins' as *;
+
+.header {
+  grid-area: header;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: 'brand search toggle';
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin: 0 -1rem;
+  padding: 0.85rem 1rem;
+  @include glass(20px);
+  border-width: 0 0 1px;
+  border-radius: 0;
+
+  @include down(md) {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'brand  toggle'
+      'search search';
+  }
+
+  @include up(lg) {
+    top: 1rem;
+    margin: 1rem 0 0;
+    padding: 0.85rem 1.25rem;
+    border-width: 1px;
+    border-radius: var(--radius-lg);
+  }
+
+  &__brand {
+    grid-area: brand;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: var(--text);
+    @include focus-ring;
+  }
+
+  &__logo {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--accent-gradient);
+    font-size: 1.2rem;
+    box-shadow: 0 6px 20px -6px var(--accent);
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .search {
+    grid-area: search;
+  }
+
+  .theme-toggle {
+    grid-area: toggle;
+  }
+}

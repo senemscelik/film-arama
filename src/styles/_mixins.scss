@@ -1,0 +1,64 @@
+@use 'sass:map';
+
+$breakpoints: (
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1440px,
+);
+
+// Mobil-öncelikli: @include up(md) { ... }
+@mixin up($bp) {
+  @media (min-width: map.get($breakpoints, $bp)) {
+    @content;
+  }
+}
+
+@mixin down($bp) {
+  @media (max-width: map.get($breakpoints, $bp) - 1px) {
+    @content;
+  }
+}
+
+// Buzlu cam yüzey
+@mixin glass($blur: 18px) {
+  background: var(--surface-glass);
+  backdrop-filter: blur($blur) saturate(160%);
+  -webkit-backdrop-filter: blur($blur) saturate(160%);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm), inset 0 1px 0 var(--highlight);
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Yükleme iskeleti parıltısı
+@mixin shimmer {
+  background: linear-gradient(
+      100deg,
+      transparent 20%,
+      var(--shimmer) 50%,
+      transparent 80%
+    )
+    var(--surface-2);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@mixin hide-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

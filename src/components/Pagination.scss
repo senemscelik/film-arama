@@ -1,0 +1,41 @@
+@use '../styles/mixins' as *;
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 2rem;
+
+  &__btn {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 0.6rem;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s var(--ease);
+    @include glass(10px);
+    @include focus-ring;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    &.is-active {
+      background: var(--accent-gradient);
+      color: var(--on-accent);
+      border-color: transparent;
+    }
+  }
+
+  &__gap {
+    color: var(--text-muted);
+    padding: 0 0.2rem;
+  }
+}

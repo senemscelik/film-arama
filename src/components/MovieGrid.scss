@@ -1,0 +1,32 @@
+@use '../styles/mixins' as *;
+
+.movie-grid {
+  display: grid;
+  // Ekran genişliğine göre otomatik sütun sayısı
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+
+  @include up(sm) {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  }
+
+  @include up(xl) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  &__empty {
+    display: grid;
+    place-items: center;
+    gap: 0.5rem;
+    padding: 4rem 1rem;
+    text-align: center;
+    color: var(--text-muted);
+    border-radius: var(--radius-lg);
+    @include glass;
+
+    span {
+      font-size: 3rem;
+    }
+  }
+}

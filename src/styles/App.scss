@@ -1,0 +1,103 @@
+@use 'mixins' as *;
+
+// Sayfa iskeleti: CSS Grid template areas
+.app {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'header'
+    'sidebar'
+    'main'
+    'footer';
+  gap: 1.25rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 1rem 1.5rem;
+  min-height: 100vh;
+
+  @include up(lg) {
+    grid-template-columns: 260px minmax(0, 1fr);
+    grid-template-areas:
+      'header  header'
+      'sidebar main'
+      'footer  footer';
+    gap: 1.75rem 2rem;
+    padding: 0 2rem 2rem;
+  }
+
+  &__sidebar {
+    grid-area: sidebar;
+    min-width: 0;
+
+    @include up(lg) {
+      position: sticky;
+      top: 6.5rem;
+      align-self: start;
+    }
+  }
+
+  &__main {
+    grid-area: main;
+    min-width: 0;
+  }
+
+  &__heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1.25rem;
+
+    h1 {
+      font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, var(--text), var(--text-muted));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
+  &__count {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    @include glass(10px);
+  }
+
+  &__hint {
+    margin: -0.5rem 0 1.25rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  &__state {
+    display: grid;
+    place-items: center;
+    gap: 0.5rem;
+    padding: 4rem 1rem;
+    text-align: center;
+    border-radius: var(--radius-lg);
+    @include glass;
+
+    span {
+      font-size: 2.5rem;
+    }
+
+    &--error p {
+      color: var(--low);
+      max-width: 50ch;
+    }
+  }
+
+  &__footer {
+    grid-area: footer;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+}
